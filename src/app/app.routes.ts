@@ -9,7 +9,7 @@ export const routes: Routes = [
     redirectTo: 'login',
   },
   {
-    path: 'Login',
+    path: 'login',
     component: LoginComponent,
   },
   {
