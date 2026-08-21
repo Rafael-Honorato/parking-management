@@ -13,6 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '@app/features/auth/services/auth.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -23,6 +24,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatIconModule,
     MatButton,
     MatProgressSpinnerModule,
+    RouterLink,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
@@ -33,6 +35,7 @@ export class LoginComponent {
   private readonly snackBar = inject(MatSnackBar);
   protected isLoading = signal(false);
   protected hide = signal(true);
+  protected messageError = signal('');
 
   form: FormGroup = this.fb.nonNullable.group({
     emailId: ['', [Validators.required, Validators.email]],
