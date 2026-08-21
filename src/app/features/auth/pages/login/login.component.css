@@ -1,0 +1,20 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100dvh; /* dynamic viewport height - melhor no mobile */
+  width: 100%;
+  background: url("/bg-login.webp");
+  background-size: cover;
+  background-position: center center;
+}
+
+.form-container {
+  width: 100%;
+  max-width: 400px;
+  padding: 1.5rem;
+}
+
+.full-width {
+  width: 100%;
+}
