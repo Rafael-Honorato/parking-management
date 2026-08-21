@@ -11,7 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { UserService } from '@app/core/services/user.service';
+import { AuthService } from '@app/features/auth/services/auth.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
@@ -29,7 +29,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 })
 export class LoginComponent {
   private readonly fb = inject(FormBuilder);
-  private readonly userService = inject(UserService);
+  private readonly userService = inject(AuthService);
   private readonly snackBar = inject(MatSnackBar);
   protected isLoading = signal(false);
   protected hide = signal(true);
