@@ -12,7 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { RouterLink } from '@angular/router';
+import { Event, Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -33,7 +33,8 @@ export class RegisterComponent {
   private readonly _fb = inject(FormBuilder);
   protected readonly _isLoading = signal(false);
   private readonly _snackBar = inject(MatSnackBar);
-  protected readonly _hide = signal(false);
+  private router = inject(Router);
+  passhide = signal(false);
 
   protected readonly _form: FormGroup = this._fb.nonNullable.group({
     emailId: ['', [Validators.required, Validators.email]],
@@ -52,6 +53,8 @@ export class RegisterComponent {
       next: (user) => {
         this.mensagemUser(true);
         this._isLoading.set(false);
+        this.router.navigate(['/auth']);
+        console.table(user);
       },
       error: (err) => {
         console.log(err);
@@ -75,5 +78,10 @@ export class RegisterComponent {
         verticalPosition: 'top',
       });
     }
+  }
+
+  clickEvent(event: MouseEvent) {
+    event.preventDefault();
+    this.passhide.update((m) => !m);
   }
 }

@@ -21,7 +21,7 @@
         <mat-form-field appearance="fill" class="full-width">
           <mat-label>Nome completo</mat-label>
           <input matInput formControlName="fullName" type="text" />
-          <mat-icon matSuffix>mail</mat-icon>
+          <mat-icon matSuffix>account_circle</mat-icon>
           @if (this._form.get("fullName")?.hasError("required")) {
             <mat-error>Nome Completo Obrigatório</mat-error>
           }
@@ -31,7 +31,7 @@
         <mat-form-field appearance="fill" class="full-width">
           <mat-label>Número celular</mat-label>
           <input matInput formControlName="mobileNo" type="text" />
-          <mat-icon matSuffix>mail</mat-icon>
+          <mat-icon matSuffix>phone</mat-icon>
           @if (this._form.get("mobileNo")?.hasError("required")) {
             <mat-error>Telefone Obrigatório</mat-error>
           }
@@ -56,9 +56,14 @@
           <input
             matInput
             formControlName="password"
-            [type]="_hide() ? 'password' : 'text'"
+            [type]="passhide() ? 'text' : 'password'"
           />
-          <mat-icon matSuffix>mail</mat-icon>
+          <mat-icon
+            class="cursor-pointer"
+            matSuffix
+            (click)="clickEvent($event)"
+            >{{ passhide() ? "visibility" : "visibility_off" }}</mat-icon
+          >
           @if (this._form.get("password")?.hasError("required")) {
             <mat-error>Senha obrogatória</mat-error>
           }
