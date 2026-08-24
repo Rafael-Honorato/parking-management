@@ -34,7 +34,12 @@
             formControlName="password"
             [type]="hide() ? 'password' : 'text'"
           />
-          <mat-icon matSuffix>mail</mat-icon>
+          <mat-icon
+            class="cursor-pointer"
+            matSuffix
+            (click)="clickEvent($event)"
+            >{{ hide() ? "visibility_off" : "visibility" }}</mat-icon
+          >
           @if (this.form.get("password")?.hasError("required")) {
             <mat-error>Senha obrogatória</mat-error>
           }

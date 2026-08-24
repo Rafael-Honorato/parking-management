@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -13,7 +13,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '@app/features/auth/services/auth.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { LoginUserDTO } from '@app/core/model/user.model';
 
 @Component({
   selector: 'app-login',
@@ -29,10 +30,11 @@ import { RouterLink } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
   private readonly userService = inject(AuthService);
   private readonly snackBar = inject(MatSnackBar);
+  private readonly router = inject(Router);
   protected isLoading = signal(false);
   protected hide = signal(true);
   protected messageError = signal('');
@@ -41,6 +43,12 @@ export class LoginComponent {
     emailId: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required]],
   });
+
+  ngOnInit(): void {
+    if (this.userService.user()) {
+      this.router.navigate(['/dashboard']);
+    }
+  }
 
   onLogin() {
     if (this.form.invalid) {
@@ -60,6 +68,7 @@ export class LoginComponent {
       next: (user) => {
         this.isLoading.set(false);
         this.mensagemUser(true);
+        this.router.navigate(['/dashboard']);
       },
       error: (err) => {
         this.isLoading.set(false);
@@ -81,7 +90,8 @@ export class LoginComponent {
   }
 
   clickEvent(event: MouseEvent) {
-    this.hide.set(!this.hide());
+    console.log('teste');
+    this.hide.update((m) => !m);
     event.stopPropagation();
   }
 }
