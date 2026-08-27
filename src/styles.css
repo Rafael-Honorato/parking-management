@@ -4,3 +4,7 @@
 router-outlet {
   display: block;
 }
+
+body {
+  font-family: "Montserrat", sans-serif;
+}
