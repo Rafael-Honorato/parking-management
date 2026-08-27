@@ -15,6 +15,7 @@ import { AuthService } from '@app/features/auth/services/auth.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Router, RouterLink } from '@angular/router';
 import { LoginUserDTO } from '@app/core/model/user.model';
+import { LogoBrandComponent } from '@app/shared/components/logo-brand/logo-brand.component';
 
 @Component({
   selector: 'app-login',
@@ -26,6 +27,7 @@ import { LoginUserDTO } from '@app/core/model/user.model';
     MatButton,
     MatProgressSpinnerModule,
     RouterLink,
+    LogoBrandComponent,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
