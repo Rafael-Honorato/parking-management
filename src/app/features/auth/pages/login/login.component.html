@@ -8,12 +8,17 @@
         <mat-form-field appearance="fill" class="full-width">
           <mat-label>E-mail</mat-label>
           <input matInput formControlName="emailId" type="email" />
-          <mat-icon matSuffix>mail</mat-icon>
+          <mat-icon matSuffix
+            ><span class="material-symbols-outlined"> mail </span></mat-icon
+          >
+          @if (this.form.get("emailId")?.hasError("invalidCredentials")) {
+            <mat-error>Usuário ou senha inválidos.</mat-error>
+          }
           @if (this.form.get("emailId")?.hasError("email")) {
-            <mat-error>Email imcompatível</mat-error>
+            <mat-error>E-mail incompatível</mat-error>
           }
           @if (this.form.get("emailId")?.hasError("required")) {
-            <mat-error>Email Obrigatório</mat-error>
+            <mat-error>E-mail Obrigatório</mat-error>
           }
         </mat-form-field>
       </div>
@@ -25,14 +30,20 @@
             formControlName="password"
             [type]="hide() ? 'password' : 'text'"
           />
-          <mat-icon
-            class="cursor-pointer"
-            matSuffix
-            (click)="clickEvent($event)"
-            >{{ hide() ? "visibility_off" : "visibility" }}</mat-icon
-          >
+          <mat-icon matSuffix>
+            <span
+              class="material-symbols-outlined cursor-pointer select-none"
+              matSuffix
+              (click)="clickEvent($event)"
+            >
+              {{ hide() ? "visibility" : "visibility_off" }}
+            </span>
+          </mat-icon>
+          @if (this.form.get("password")?.hasError("invalidCredentials")) {
+            <mat-error>Usuário ou senha inválidos.</mat-error>
+          }
           @if (this.form.get("password")?.hasError("required")) {
-            <mat-error>Senha obrogatória</mat-error>
+            <mat-error>Senha obrigatória</mat-error>
           }
         </mat-form-field>
       </div>

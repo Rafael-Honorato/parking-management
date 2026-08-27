@@ -68,6 +68,9 @@ export class LoginComponent {
       },
       error: (err) => {
         this.isLoading.set(false);
+        this.form.get('emailId')?.setErrors({ invalidCredentials: true });
+        this.form.get('password')?.setErrors({ invalidCredentials: true });
+        this.form.get('password')?.reset();
         this.mensagemUser(false, err);
       },
     });
@@ -82,6 +85,7 @@ export class LoginComponent {
       duration: 3000,
       horizontalPosition: 'right',
       verticalPosition: 'top',
+      panelClass: success ? ['snackbar-success'] : ['snackbar-error'],
     });
   }
 
