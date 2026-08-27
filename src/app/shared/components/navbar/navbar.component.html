@@ -1,0 +1,95 @@
+<header
+  class="h-16 bg-slate-900 border-b border-slate-800 flex items-center justify-between px-4 fixed top-0 left-0 right-0 z-50"
+>
+  <div class="flex gap-2 items-center">
+    <img
+      class="w-5 h-5 cursor-pointer hover:outline-1 hover:outline-blue-500 rounded-md p-0.5 transition-all duration-300"
+      src="https://cdn-icons-png.flaticon.com/512/7080/7080625.png"
+      alt="Abrir menu"
+      (click)="onToggle()"
+    />
+    <app-logo-brand />
+  </div>
+
+  <div class="p-2">
+    <img
+      class="w-6.25"
+      src="https://cdn-icons-png.flaticon.com/512/9512/9512683.png"
+      alt="Notificações"
+    />
+  </div>
+</header>
+
+<div
+  class="fixed top-16 left-0 right-0 bottom-0 z-40 flex transition-all duration-300 pointer-events-none"
+  [class.pointer-events-none]="!toggle()"
+  [class.pointer-events-auto]="toggle()"
+>
+  <div
+    class="flex flex-col gap-3 h-full w-64 bg-slate-900 p-5 py-6 shadow-lg z-10 relative transition-transform duration-300 ease-in-out overflow-y-auto -translate-x-full"
+    [class.-translate-x-full]="!toggle()"
+    [class.translate-x-0]="toggle()"
+  >
+    <a
+      class="text-slate-100 flex items-center gap-2 py-2 px-4 rounded-full transition-colors"
+      #rlaDashboard="routerLinkActive"
+      routerLinkActive="/"
+      [class]="
+        rlaDashboard.isActive
+          ? 'bg-blue-600 text-white font-bold'
+          : 'text-slate-300 hover:bg-slate-800 hover:text-white font-light'
+      "
+      routerLink="/"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      <span class="material-symbols-outlined"> home </span>Dashboard
+    </a>
+    <a
+      class="text-slate-100 flex items-center gap-2 py-2 px-4 rounded-full transition-colors"
+      #rlaRelatorios="routerLinkActive"
+      routerLinkActive=""
+      [class]="
+        rlaRelatorios.isActive
+          ? 'bg-blue-600 text-white font-bold'
+          : 'text-slate-300 hover:bg-slate-800 hover:text-white font-light'
+      "
+      routerLink="/relatorios"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      <span class="material-symbols-outlined"> add_notes </span>Relatórios
+    </a>
+
+    <a
+      class="text-slate-100 flex items-center gap-2 py-2 px-4 rounded-full transition-colors"
+      #rlaCadastros="routerLinkActive"
+      routerLinkActive=""
+      [class]="
+        rlaCadastros.isActive
+          ? 'bg-blue-600 text-white font-bold'
+          : 'text-slate-300 hover:bg-slate-800 hover:text-white font-light'
+      "
+      routerLink="/cadastros"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      <span class="material-symbols-outlined"> library_add </span>Cadastros
+    </a>
+
+    <div class="mt-auto flex flex-col gap-3">
+      <hr class="border-slate-800" />
+      <a
+        class="text-red-400 hover:bg-red-500/10 hover:text-red-300 flex items-center gap-2 py-2 px-4 rounded-full transition-colors font-light cursor-pointer"
+        (click)="onSair()"
+      >
+        <span class="material-symbols-outlined"> door_open </span>
+        SAIR
+      </a>
+    </div>
+  </div>
+
+  <div
+    class="absolute bg-slate-950/60 w-full h-full cursor-pointer transition-opacity duration-300 ease-in-out"
+    [class.opacity-0]="!toggle()"
+    [class.opacity-100]="toggle()"
+    (click)="onToggle()"
+  ></div>
+</div>
