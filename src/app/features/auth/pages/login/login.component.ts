@@ -15,6 +15,7 @@ import { AuthService } from '@app/features/auth/services/auth.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Router, RouterLink } from '@angular/router';
 import { LoginUserDTO } from '@app/core/model/user.model';
+import { LogoBrandComponent } from '@app/shared/components/logo-brand/logo-brand.component';
 
 @Component({
   selector: 'app-login',
@@ -26,11 +27,12 @@ import { LoginUserDTO } from '@app/core/model/user.model';
     MatButton,
     MatProgressSpinnerModule,
     RouterLink,
+    LogoBrandComponent,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   private readonly fb = inject(FormBuilder);
   private readonly userService = inject(AuthService);
   private readonly snackBar = inject(MatSnackBar);
@@ -43,12 +45,6 @@ export class LoginComponent implements OnInit {
     emailId: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required]],
   });
-
-  ngOnInit(): void {
-    if (this.userService.user()) {
-      this.router.navigate(['/dashboard']);
-    }
-  }
 
   onLogin() {
     if (this.form.invalid) {
@@ -68,7 +64,7 @@ export class LoginComponent implements OnInit {
       next: (user) => {
         this.isLoading.set(false);
         this.mensagemUser(true);
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/']);
       },
       error: (err) => {
         this.isLoading.set(false);
