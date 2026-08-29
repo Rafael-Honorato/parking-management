@@ -1,11 +1,10 @@
 import { Component, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { AuthService } from './features/auth/services/auth.service';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, NavbarComponent],
+  imports: [RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
