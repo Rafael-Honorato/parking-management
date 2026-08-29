@@ -10,10 +10,7 @@ export const routes: Routes = [
   {
     path: '',
     canActivate: [authGuard],
-    loadComponent: () =>
-      import('./features/layout/layout.component').then(
-        (m) => m.LayoutComponent,
-      ),
+    // loadComponent: () => import('./app.component').then((m) => m.AppComponent),
     children: [
       {
         path: '',
@@ -27,7 +24,7 @@ export const routes: Routes = [
   {
     path: '404',
     loadComponent: () =>
-      import('./shared/components/not-found/not-found.component').then(
+      import('./features/not-found/not-found.component').then(
         (m) => m.NotFoundComponent,
       ),
   },

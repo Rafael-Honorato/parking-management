@@ -5,7 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav';
 
 @Component({
-  selector: 'app-layout',
+  selector: 'app-layout-bkp',
   imports: [RouterOutlet, NavbarComponent, MatSidenavModule, MatButtonModule],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.css',
