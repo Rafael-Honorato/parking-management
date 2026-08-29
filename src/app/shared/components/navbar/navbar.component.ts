@@ -1,4 +1,4 @@
-import { Component, inject, output, signal } from '@angular/core';
+import { Component, inject, OnInit, output, signal } from '@angular/core';
 import { LogoBrandComponent } from '../logo-brand/logo-brand.component';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '@app/features/auth/services/auth.service';
@@ -14,6 +14,7 @@ export class NavbarComponent {
   router = inject(Router);
   fnToggle = output<boolean>();
   toggle = signal<boolean>(false);
+  userName = signal(this.authService.user()?.mobileNo);
 
   onToggle() {
     this.toggle.update((m) => !m);
