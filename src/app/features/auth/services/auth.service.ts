@@ -24,6 +24,7 @@ export class AuthService {
     return this.http.post<User>(`${environment.BASE_URL}login`, objLogin).pipe(
       tap((user) => {
         this.lsService.setUser(user);
+        console.table(user);
       }),
     );
   }

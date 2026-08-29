@@ -1,1 +1,127 @@
-<p>dashboard works!</p>
+<!-- Header-->
+<div class="flex flex-col p-2 md:p-4 gap-4">
+  <div
+    class="flex justify-between p-6 border border-indigo-500 bg-white rounded-2xl"
+  >
+    <div>
+      <p class="text-2xl text-indigo-700 font-bold">Parking Painel</p>
+      <p>Gerêncie e monitore as vagas</p>
+    </div>
+    <div>
+      <form class="flex gap-2 items-center" [formGroup]="form">
+        <mat-form-field>
+          <mat-label>Cliente</mat-label>
+          <mat-select formControlName="cliente">
+            <mat-option>Cliente</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Empresa</mat-label>
+          <mat-select formControlName="piso">
+            <mat-option>Cliente</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Piso</mat-label>
+          <mat-select formControlName="piso">
+            <mat-option>Cliente</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <button><span class="material-symbols-outlined"> search </span></button>
+      </form>
+    </div>
+  </div>
+  <!-- KPI-->
+  <div class="flex justify-between gap-4">
+    @for (item of kpi; track $index) {
+      <!--ITEM -->
+      <app-kpi
+        icon="motion_photos_auto"
+        [titulo]="`${'Titulo'}`"
+        [qtd]="0"
+        class="flex-1"
+      ></app-kpi>
+    }
+  </div>
+  <!-- Parking -->
+  <div
+    class="flex flex-col border border-indigo-500 bg-white rounded-2xl px-6 py-4 gap-8"
+  >
+    <div class="flex justify-between items-center">
+      <div class="flex flex-col gap-2 text-[10px] uppercase flex-1">
+        <p class="text-2xl text-indigo-700 font-bold">Vagas</p>
+        <div class="flex gap-4">
+          <div class="flex items-center gap-1">
+            <span class="w-2.5 h-2.5 bg-green-600 rounded-full"></span>
+            disponível
+          </div>
+          <div class="flex items-center gap-1">
+            <span class="w-2.5 h-2.5 bg-red-400 rounded-full"></span> ocupado
+          </div>
+          <div class="flex items-center gap-1">
+            <span class="w-2.5 h-2.5 bg-blue-400 rounded-full"></span> reservado
+          </div>
+          <div class="flex items-center gap-1">
+            <span class="w-2.5 h-2.5 bg-gray-400 rounded-full"></span>
+            manutenção
+          </div>
+        </div>
+        <hr class="text-gray-300" />
+      </div>
+      <div>
+        <button
+          class="flex justify-between items-center gap-1 bg-gray-200 pr-1 pl-3 py-1 text-gray-400 rounded-full border-gray-300 border hover:text-white hover:bg-indigo-800 transition-all ease-in-out cursor-pointer"
+        >
+          Atualizar
+          <span class="material-symbols-outlined p-1 rounded-full">
+            refresh
+          </span>
+        </button>
+      </div>
+    </div>
+
+    <!-- VAGAS-->
+    <div
+      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4"
+    >
+      @for (item of [].constructor(8); track $index) {
+        <div
+          class="bg-slate-200 border border-slate-400 rounded-xl p-4 flex flex-col gap-3 w-full"
+        >
+          <!-- Cabeçalho do Card: Status da vaga + Número -->
+          <div
+            class="flex items-center justify-between border-b border-slate-200/80 pb-3"
+          >
+            <div class="h-6 w-20 bg-slate-300 rounded-full"></div>
+            <div class="h-5 w-12 bg-slate-300 rounded-md"></div>
+          </div>
+
+          <!-- Informações Principais: Placa do Veículo -->
+          <div class="flex flex-col gap-1.5 my-1">
+            <div class="h-3 w-16 bg-slate-300/60 rounded"></div>
+            <div class="h-7 w-32 bg-slate-300 rounded-lg"></div>
+          </div>
+
+          <!-- Detalhes Secundários: Data e Hora de Entrada -->
+          <div class="grid grid-cols-2 gap-2 pt-1 border-t border-slate-200/50">
+            <div class="flex flex-col gap-1">
+              <div class="h-3 w-10 bg-slate-300/60 rounded"></div>
+              <div class="h-4 w-20 bg-slate-300/80 rounded"></div>
+            </div>
+            <div class="flex flex-col gap-1">
+              <div class="h-3 w-10 bg-slate-300/60 rounded"></div>
+              <div class="h-4 w-16 bg-slate-300/80 rounded"></div>
+            </div>
+          </div>
+
+          <!-- Rodapé do Card: Modelo/Cliente ou Tempo Decorrido -->
+          <div class="flex items-center justify-between pt-2">
+            <div class="h-4 w-24 bg-slate-300/80 rounded"></div>
+            <div class="h-4 w-14 bg-slate-300/50 rounded"></div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</div>
