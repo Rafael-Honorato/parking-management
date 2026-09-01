@@ -1,0 +1,178 @@
+@if (spot(); as item) {
+  <div
+    class="border rounded-xl p-4 flex flex-col justify-between gap-3 w-full min-h-[280px] shadow-sm transition-all"
+    [ngClass]="
+      item.isOcupied
+        ? 'border-red-500 bg-red-50/90'
+        : 'border-emerald-400 bg-emerald-50/60'
+    "
+  >
+    <!-- 1. Cabeçalho -->
+    <div
+      class="flex justify-between items-center pb-3 border-b"
+      [ngClass]="item.isOcupied ? 'border-red-200/80' : 'border-emerald-200'"
+    >
+      <!-- Número da vaga -->
+      <div
+        class="flex w-14 h-14 justify-center items-center bg-white rounded-full shadow-sm border border-slate-100"
+      >
+        <span
+          class="text-3xl font-black"
+          [ngClass]="item.isOcupied ? 'text-slate-800' : 'text-slate-400'"
+        >
+          {{ item.spotNumber }}
+        </span>
+      </div>
+
+      <!-- Placa ou Badge LIVRE -->
+      @if (item.isOcupied) {
+        <div
+          class="px-3 py-1.5 bg-slate-900 text-yellow-400 font-mono font-bold text-2xl rounded-lg tracking-wider shadow"
+        >
+          {{ item.parkigData?.vehicleNo }}
+        </div>
+      } @else {
+        <div
+          class="px-3 py-1.5 bg-emerald-100 text-emerald-800 font-bold text-lg rounded-lg tracking-wider border border-emerald-200"
+        >
+          LIVRE
+        </div>
+      }
+    </div>
+
+    <!-- 2. Conteúdo Central -->
+    @if (item.isOcupied) {
+      <div
+        class="flex flex-col gap-1 bg-white/70 p-2.5 rounded-lg border border-red-100"
+      >
+        <span
+          class="text-[10px] font-bold tracking-wider text-slate-500 uppercase"
+        >
+          Cliente / Contato
+        </span>
+        <div
+          class="flex justify-between items-center text-sm font-semibold text-slate-800"
+        >
+          <span>{{
+            item.parkigData?.custName ||
+              item.parkigData?.clientName ||
+              "Não Informado"
+          }}</span>
+          <span class="text-xs text-slate-600 font-normal">{{
+            item.parkigData?.custMobileNo
+          }}</span>
+        </div>
+      </div>
+    } @else {
+      <div
+        class="flex flex-col justify-center items-center gap-1 bg-white/50 p-2.5 rounded-lg border border-emerald-100/60 flex-1"
+      >
+        <span class="text-sm font-semibold text-emerald-700"
+          >Vaga disponível</span
+        >
+        <span class="text-xs text-slate-500">Aguardando veículo</span>
+      </div>
+    }
+
+    <!-- 3. Detalhes de Entrada/Horário -->
+    <div
+      class="grid grid-cols-2 gap-2 pt-1 border-t"
+      [ngClass]="
+        item.isOcupied
+          ? 'border-red-200/60'
+          : 'border-emerald-200/60 opacity-40'
+      "
+    >
+      <div class="flex flex-col">
+        <span
+          class="text-[10px] font-bold uppercase"
+          [ngClass]="item.isOcupied ? 'text-slate-500' : 'text-slate-400'"
+        >
+          Entrada
+        </span>
+        <span
+          class="text-xs font-semibold"
+          [ngClass]="item.isOcupied ? 'text-slate-700' : 'text-slate-400'"
+        >
+          {{
+            item.isOcupied ? (item.parkigData?.inTime | date: "HH:mm") : "--:--"
+          }}
+        </span>
+      </div>
+
+      <div class="flex flex-col text-right">
+        <span
+          class="text-[10px] font-bold uppercase"
+          [ngClass]="item.isOcupied ? 'text-slate-500' : 'text-slate-400'"
+        >
+          Valor
+        </span>
+        <span
+          class="text-xs font-bold"
+          [ngClass]="item.isOcupied ? 'text-emerald-700' : 'text-slate-400'"
+        >
+          {{
+            item.isOcupied
+              ? (item.parkigData?.amount | currency: "BRL" : "symbol" : "1.2-2")
+              : "R$ 0,00"
+          }}
+        </span>
+      </div>
+    </div>
+
+    <!-- 4. Rodapé -->
+    <div
+      class="flex items-center justify-between pt-2 border-t text-xs"
+      [ngClass]="
+        item.isOcupied
+          ? 'border-red-200/60 text-slate-600'
+          : 'border-emerald-200/60 text-slate-500'
+      "
+    >
+      <span class="font-medium">
+        {{
+          item.isOcupied
+            ? item.parkigData?.buildingName + " - " + item.parkigData?.floorNo
+            : "Pronto para uso"
+        }}
+      </span>
+
+      <span
+        class="px-2 py-0.5 rounded-full font-bold text-[10px] uppercase"
+        [ngClass]="
+          item.isOcupied
+            ? 'bg-red-200 text-red-800'
+            : 'bg-emerald-200 text-emerald-800'
+        "
+      >
+        {{ item.isOcupied ? "Ocupado" : "Disponível" }}
+      </span>
+    </div>
+  </div>
+} @else {
+  <!-- SKELETON (Quando spot não for passado) -->
+  <div
+    class="border border-slate-200 rounded-xl p-4 flex flex-col justify-between gap-3 w-full min-h-[280px] bg-slate-50 animate-pulse"
+  >
+    <div
+      class="flex justify-between items-center pb-3 border-b border-slate-200"
+    >
+      <div class="w-14 h-14 bg-slate-200 rounded-full"></div>
+      <div class="w-24 h-8 bg-slate-200 rounded-lg"></div>
+    </div>
+
+    <div class="h-14 bg-slate-200 rounded-lg w-full"></div>
+
+    <div class="grid grid-cols-2 gap-2 pt-1 border-t border-slate-200">
+      <div class="h-8 bg-slate-200 rounded"></div>
+      <div class="h-8 bg-slate-200 rounded"></div>
+    </div>
+
+    <div
+      class="flex justify-between items-center pt-2 border-t border-slate-200"
+    >
+      <div class="w-28 h-4 bg-slate-200 rounded"></div>
+      <div class="w-16 h-4 bg-slate-200 rounded-full"></div>
+    </div>
+  </div>
+}
