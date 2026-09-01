@@ -1,15 +1,97 @@
-<div
-  class="flex justify-between items-center flex-1 border border-indigo-500 bg-white rounded-2xl px-6 py-4 gap-2"
->
-  <div class="flex flex-col gap-1 flex-1">
-    <div class="text-[10px] text-indigo-600 font-bold border-b border-gray-300">
-      {{ titulo().toUpperCase() }}
-    </div>
-    <div class="text-2xl font-bold">{{ qtd() }}</div>
-  </div>
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
   <div
-    class="flex justify-center items-center rounded-full w-12 h-12 bg-indigo-700 text-white p-2"
+    class="flex justify-between items-center flex-1 border border-indigo-500 bg-white rounded-2xl px-6 py-4 gap-2"
   >
-    <span class="material-symbols-outlined"> {{ icon() }}</span>
+    <div class="flex flex-col gap-1 flex-1">
+      <div
+        class="text-[10px] text-indigo-600 font-bold border-b border-gray-300"
+      >
+        TOTAL VAGAS
+      </div>
+      <div class="text-2xl font-bold">
+        @if (isLoading()) {
+          <mat-spinner [diameter]="20"></mat-spinner>
+        } @else {
+          {{ kpi()?.total }}
+        }
+      </div>
+    </div>
+    <div
+      class="flex justify-center items-center rounded-full w-12 h-12 bg-indigo-700 text-white p-2"
+    >
+      <span class="material-symbols-outlined"> motion_photos_auto</span>
+    </div>
+  </div>
+
+  <div
+    class="flex justify-between items-center flex-1 border border-indigo-500 bg-white rounded-2xl px-6 py-4 gap-2"
+  >
+    <div class="flex flex-col gap-1 flex-1">
+      <div
+        class="text-[10px] text-indigo-600 font-bold border-b border-gray-300"
+      >
+        VAGAS LIVRES
+      </div>
+      <div class="text-2xl font-bold">
+        @if (isLoading()) {
+          <mat-spinner [diameter]="20"></mat-spinner>
+        } @else {
+          {{ kpi()?.free }}
+        }
+      </div>
+    </div>
+    <div
+      class="flex justify-center items-center rounded-full w-12 h-12 bg-indigo-700 text-white p-2"
+    >
+      <span class="material-symbols-outlined"> motion_photos_auto</span>
+    </div>
+  </div>
+
+  <div
+    class="flex justify-between items-center flex-1 border border-indigo-500 bg-white rounded-2xl px-6 py-4 gap-2"
+  >
+    <div class="flex flex-col gap-1 flex-1">
+      <div
+        class="text-[10px] text-indigo-600 font-bold border-b border-gray-300"
+      >
+        VAGAS OCUPADAS
+      </div>
+      <div class="text-2xl font-bold">
+        @if (isLoading()) {
+          <mat-spinner [diameter]="20"></mat-spinner>
+        } @else {
+          {{ kpi()?.ocupied }}
+        }
+      </div>
+    </div>
+    <div
+      class="flex justify-center items-center rounded-full w-12 h-12 bg-indigo-700 text-white p-2"
+    >
+      <span class="material-symbols-outlined"> motion_photos_auto</span>
+    </div>
+  </div>
+
+  <div
+    class="flex justify-between items-center flex-1 border border-indigo-500 bg-white rounded-2xl px-6 py-4 gap-2"
+  >
+    <div class="flex flex-col gap-1 flex-1">
+      <div
+        class="text-[10px] text-indigo-600 font-bold border-b border-gray-300"
+      >
+        TOTAL RESERVADAS
+      </div>
+      <div class="text-2xl font-bold">
+        @if (isLoading()) {
+          <mat-spinner [diameter]="20"></mat-spinner>
+        } @else {
+          {{ kpi()?.reerved }}
+        }
+      </div>
+    </div>
+    <div
+      class="flex justify-center items-center rounded-full w-12 h-12 bg-indigo-700 text-white p-2"
+    >
+      <span class="material-symbols-outlined"> motion_photos_auto</span>
+    </div>
   </div>
 </div>

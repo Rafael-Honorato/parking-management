@@ -1,13 +1,14 @@
 import { Component, input } from '@angular/core';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { kpiDataParkingSpot } from '@app/core/model/sites.models';
 
 @Component({
   selector: 'app-kpi',
-  imports: [],
+  imports: [MatProgressSpinnerModule],
   templateUrl: './kpi.component.html',
   styleUrl: './kpi.component.css',
 })
 export class KpiComponent {
-  titulo = input<string>('');
-  qtd = input<number>(0);
-  icon = input<string>('');
+  kpi = input<kpiDataParkingSpot>();
+  isLoading = input<Boolean>(false);
 }
